@@ -1,3 +1,3 @@
 git add .
-git commit -m "Migrated from intial codebase."
+git commit -m "Online, Busy, Offline ,Disconnect sync"
 git push origin master

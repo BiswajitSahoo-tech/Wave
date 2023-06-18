@@ -85,6 +85,8 @@ if( disCnt){
         e.preventDefault()
         const wrksDataStore = document.getElementById('wrksDataStore')
         const connId = wrksDataStore.dataset.connid
+        if(DataConnection )
+            sendDisonnect()
         await markBusy()
         disconnect(connId)
 

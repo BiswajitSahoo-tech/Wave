@@ -133,35 +133,6 @@ export const connect= async (Id,callerPeerId,receiverPeerId)=> {
     try{
         const res = await axios( {
             method: 'GET',
-            url: '/api/v1/users/active/'+receiverPeerId,
-            
-           })
-
-           
-           if( res.data.status === 'success'){
-                console.log( res.data.data)
-                if( res.data.data.active === false){
-                    alert(receiverPeerId+' is not online at this moment.')
-                    return ;
-                }
-           }
-           else if(res.data.status === 'fail'){
-                console.log( res.data.data)
-                
-                alert('No user with this id: '+receiverPeerId)
-                return ;
-                
-           }
-           else{
-            console.log(res.data)
-           }
-
-    }catch( err){
-        console.log(err)
-    }
-    try{
-        const res = await axios( {
-            method: 'GET',
             url: '/api/v1/users/busy/'+receiverPeerId,
             
            })
@@ -169,12 +140,54 @@ export const connect= async (Id,callerPeerId,receiverPeerId)=> {
            
            if( res.data.status === 'success'){
                 console.log( res.data.data)
-                if( res.data.data.active === true){
+                if( res.data.data.busy === true){
                     alert(receiverPeerId+' is busy at this moment.')
                     return ;
                 }
+                else{
+
+                    try{
+                        const res = await axios( {
+                            method: 'GET',
+                            url: '/api/v1/users/active/'+receiverPeerId,
+                            
+                           })
+                
+                           
+                           if( res.data.status === 'success'){
+                                console.log( res.data.data)
+                                if( res.data.data.active === false){
+                                    alert(receiverPeerId+' i---------s not online at this moment.')
+                                    return ;
+                                }
+                           }
+                           else if(res.data.status === 'fail'){
+                                console.log( res.data.data)
+                                
+                                alert('No user with this id: '+receiverPeerId)
+                                return ;
+                                
+                           }
+                           else{
+                            console.log(res.data)
+                           }
+                
+                    }catch( err){
+                        console.log(err)
+                    }
+                    
+
+
+
+                }
            }
-           
+           else if(res.data.status === 'fail'){
+                console.log( res.data.data)
+                
+                alert('No user with this id: '+receiverPeerId)
+                return ;
+            
+            }
            else{
             console.log(res.data)
            }
@@ -182,6 +195,7 @@ export const connect= async (Id,callerPeerId,receiverPeerId)=> {
     }catch( err){
         console.log(err)
     }
+    
 
     let initConnection = peer.connect(receiverPeerId)
     

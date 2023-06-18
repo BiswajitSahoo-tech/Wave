@@ -186,13 +186,23 @@ exports.getBusy = async (req, res, next)=> {
     const id = req.params.id
     try{
         const user = await User.findOne({peerId:id})
-        res.status(200).json({
-            status:'success',
-            data:{
-                peerId: user.peerId,
-                busy: user.busy
-            }
-        })
+        if(!user){
+            res.status(200).json({
+                status:'fail',
+                
+            })
+            
+        }
+        else{
+            res.status(200).json({
+                status:'success',
+                data:{
+                    peerId: user.peerId,
+                    busy: user.busy
+                }
+            })
+        }
+        
     }catch( err){
         return next(err)
     }

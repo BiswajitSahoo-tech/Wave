@@ -4912,74 +4912,82 @@ var connect = /*#__PURE__*/function () {
             _context5.next = 4;
             return (0, _axios.default)({
               method: 'GET',
-              url: '/api/v1/users/active/' + receiverPeerId
+              url: '/api/v1/users/busy/' + receiverPeerId
             });
           case 4:
             res = _context5.sent;
             if (!(res.data.status === 'success')) {
-              _context5.next = 12;
+              _context5.next = 37;
               break;
             }
             console.log(res.data.data);
-            if (!(res.data.data.active === false)) {
-              _context5.next = 10;
+            if (!(res.data.data.busy === true)) {
+              _context5.next = 12;
               break;
             }
-            alert(receiverPeerId + ' is not online at this moment.');
+            alert(receiverPeerId + ' is busy at this moment.');
             return _context5.abrupt("return");
-          case 10:
-            _context5.next = 19;
-            break;
           case 12:
+            _context5.prev = 12;
+            _context5.next = 15;
+            return (0, _axios.default)({
+              method: 'GET',
+              url: '/api/v1/users/active/' + receiverPeerId
+            });
+          case 15:
+            _res2 = _context5.sent;
+            if (!(_res2.data.status === 'success')) {
+              _context5.next = 23;
+              break;
+            }
+            console.log(_res2.data.data);
+            if (!(_res2.data.data.active === false)) {
+              _context5.next = 21;
+              break;
+            }
+            alert(receiverPeerId + ' i---------s not online at this moment.');
+            return _context5.abrupt("return");
+          case 21:
+            _context5.next = 30;
+            break;
+          case 23:
+            if (!(_res2.data.status === 'fail')) {
+              _context5.next = 29;
+              break;
+            }
+            console.log(_res2.data.data);
+            alert('No user with this id: ' + receiverPeerId);
+            return _context5.abrupt("return");
+          case 29:
+            console.log(_res2.data);
+          case 30:
+            _context5.next = 35;
+            break;
+          case 32:
+            _context5.prev = 32;
+            _context5.t0 = _context5["catch"](12);
+            console.log(_context5.t0);
+          case 35:
+            _context5.next = 44;
+            break;
+          case 37:
             if (!(res.data.status === 'fail')) {
-              _context5.next = 18;
+              _context5.next = 43;
               break;
             }
             console.log(res.data.data);
             alert('No user with this id: ' + receiverPeerId);
             return _context5.abrupt("return");
-          case 18:
+          case 43:
             console.log(res.data);
-          case 19:
-            _context5.next = 24;
+          case 44:
+            _context5.next = 49;
             break;
-          case 21:
-            _context5.prev = 21;
-            _context5.t0 = _context5["catch"](1);
-            console.log(_context5.t0);
-          case 24:
-            _context5.prev = 24;
-            _context5.next = 27;
-            return (0, _axios.default)({
-              method: 'GET',
-              url: '/api/v1/users/busy/' + receiverPeerId
-            });
-          case 27:
-            _res2 = _context5.sent;
-            if (!(_res2.data.status === 'success')) {
-              _context5.next = 35;
-              break;
-            }
-            console.log(_res2.data.data);
-            if (!(_res2.data.data.active === true)) {
-              _context5.next = 33;
-              break;
-            }
-            alert(receiverPeerId + ' is busy at this moment.');
-            return _context5.abrupt("return");
-          case 33:
-            _context5.next = 36;
-            break;
-          case 35:
-            console.log(_res2.data);
-          case 36:
-            _context5.next = 41;
-            break;
-          case 38:
-            _context5.prev = 38;
-            _context5.t1 = _context5["catch"](24);
+          case 46:
+            _context5.prev = 46;
+            _context5.t1 = _context5["catch"](1);
             console.log(_context5.t1);
-          case 41:
+          case 49:
             initConnection = peer.connect(receiverPeerId);
             setTimeout(function () {
               initConnection.send('intiate');
@@ -5093,12 +5101,12 @@ var connect = /*#__PURE__*/function () {
                 return _ref5.apply(this, arguments);
               };
             }());
-          case 44:
+          case 52:
           case "end":
             return _context5.stop();
         }
       }
-    }, _callee5, null, [[1, 21], [24, 38]]);
+    }, _callee5, null, [[1, 46], [12, 32]]);
   }));
   return function connect(_x3, _x4, _x5) {
     return _ref4.apply(this, arguments);
@@ -5486,11 +5494,12 @@ if (disCnt) {
               e.preventDefault();
               wrksDataStore = document.getElementById('wrksDataStore');
               connId = wrksDataStore.dataset.connid;
-              _context2.next = 5;
+              if (DataConnection) sendDisonnect();
+              _context2.next = 6;
               return (0, _disconnect.markBusy)();
-            case 5:
-              (0, _disconnect.disconnect)(connId);
             case 6:
+              (0, _disconnect.disconnect)(connId);
+            case 7:
             case "end":
               return _context2.stop();
           }
@@ -5633,7 +5642,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59388" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50859" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
