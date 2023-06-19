@@ -4645,7 +4645,7 @@ var logout = /*#__PURE__*/function () {
 }();
 exports.logout = logout;
 var signup = /*#__PURE__*/function () {
-  var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(name, email, peerId, password, passwordConfirm) {
+  var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(name, email, peerId, bio, interest, password, passwordConfirm) {
     var res;
     return _regeneratorRuntime().wrap(function _callee3$(_context3) {
       while (1) {
@@ -4660,6 +4660,8 @@ var signup = /*#__PURE__*/function () {
                 email: email,
                 name: name,
                 peerId: peerId,
+                bio: bio,
+                interest: interest,
                 password: password,
                 passwordConfirm: passwordConfirm
               }
@@ -4689,7 +4691,7 @@ var signup = /*#__PURE__*/function () {
       }
     }, _callee3, null, [[0, 8]]);
   }));
-  return function signup(_x3, _x4, _x5, _x6, _x7) {
+  return function signup(_x3, _x4, _x5, _x6, _x7, _x8, _x9) {
     return _ref3.apply(this, arguments);
   };
 }();
@@ -5562,7 +5564,9 @@ if (signupBtn) {
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;
     var passwordConfirm = document.getElementById('passwordConfirm').value;
-    (0, _login.signup)(name, email, peerId, password, passwordConfirm);
+    var bio = document.getElementById('bio').value;
+    var interests = document.getElementById('interest').value;
+    var _interests = (0, _login.signup)(name, email, peerId, bio, interests, password, passwordConfirm);
   });
 }
 if (logoutBtn) {
@@ -5642,7 +5646,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50859" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59451" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

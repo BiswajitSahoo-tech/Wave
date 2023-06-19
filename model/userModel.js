@@ -77,6 +77,9 @@ const userSchemaObject = {
         type : mongoose.Schema.ObjectId,
         ref: 'User',
         
+    }],
+    interests:[{
+        type: String
     }]
 }
 

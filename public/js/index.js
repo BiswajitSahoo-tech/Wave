@@ -150,7 +150,11 @@ if(signupBtn){
         const email = document.getElementById('email').value
         const password = document.getElementById('password').value
         const passwordConfirm = document.getElementById('passwordConfirm').value
-        signup(name , email,peerId, password, passwordConfirm)
+        const bio = document.getElementById('bio').value
+        const interests = document.getElementById('interest').value
+        const _interests = 
+        
+        signup(name , email,peerId,bio,interests, password, passwordConfirm)
     })
 }
 

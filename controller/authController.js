@@ -42,7 +42,9 @@ exports.signup = async (req, res , next)=>{
                 peerId:req.body.peerId,
                 password: req.body.password,
                 passwordConfirm: req.body.passwordConfirm,
-                peerId: req.body.peerId
+                interests: req.body.interests,
+                bio: req.body.bio
+                // peerId: req.body.peerId
             })
         }catch( err){
             console.log('Insertion--->',err)
