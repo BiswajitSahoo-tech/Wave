@@ -27,11 +27,13 @@ exports.getRoot= async ( req, res)=>{
     
     if( req.user){
         req.recentContacts = await userController.populateRecentContact(req)
-        console.log('----result------',req.recentContacts)
+        req.recommendedPeers = await userController.populaterecommendedPeers(req)
+        
         res.status(200).render('home',{
             title: "Home",
             contacts: req.recentContacts,
-            req
+            recommendedPeers: req.recommendedPeers,
+            req 
         })
     }
     else{

@@ -44,7 +44,7 @@ exports.signup = async (req, res , next)=>{
                 passwordConfirm: req.body.passwordConfirm,
                 interests: req.body.interests,
                 bio: req.body.bio
-                // peerId: req.body.peerId
+                
             })
         }catch( err){
             console.log('Insertion--->',err)
@@ -65,7 +65,7 @@ exports.signup = async (req, res , next)=>{
         
     }catch( err){
         
-        next( new AppError('We are working on it.' , 400))
+        next( err)
     }
 }
 

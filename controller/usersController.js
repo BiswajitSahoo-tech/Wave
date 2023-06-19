@@ -308,6 +308,24 @@ exports.populateRecentContact = async (req)=>{
     console.log(req.user.recentContacts)
     return recentContacts
 }
+exports.populaterecommendedPeers = async ( req)=> {
+    const recommendedPeersId = req.user.recommendedPeers
+    // console.log(recentContactsId)
+    
+    var recommendedPeers = []
+    for(var i = 0;i<recommendedPeersId.length; i++){
+        try{
+            var __user = await User.findById(recommendedPeersId[i]).select('-recentContact -status -passwordChangedAt -passwordResetToken  -passwordResetExipres -password -passwordConfirm')
+            recommendedPeers.push(__user)
+        }catch( err){
+            return next( err)
+        }
+        
+    }
+    req.user.recommendedPeers = recommendedPeers
+    // console.log(req.user.recentContacts)
+    return recommendedPeers
+}
 
 exports.getPhotoByPeerId = async ( req, res, next)=>{
     const peerId = req.params.peerId

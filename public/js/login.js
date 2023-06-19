@@ -2,7 +2,7 @@ import axios from "axios"
 import { showAlerts } from './alerts'
 
 export const login = async  ( email , password) =>{
-    // console.log( email, password)
+    
     try{
         const res = await axios( {
             method: 'POST',
@@ -13,14 +13,8 @@ export const login = async  ( email , password) =>{
             }
            })
 
-        // const active_res = await axios( {
-        //     method: 'PATCH',
-        //     url: '/api/v1/users/updateActive',
-        //     data: {
-        //         active : true
-        //     }
-        // })
-           if( res.data.status === 'success' /*&& active_res.data.status === 'success'*/){
+        
+           if( res.data.status === 'success' ){
             showAlerts('success' , 'Logged in successfully')
             // alert('success')
 
@@ -38,11 +32,7 @@ export const login = async  ( email , password) =>{
 
 export const logout = async ()=>{
     try{
-        const res = await axios( {
-            method: 'GET',
-            url: '/api/v1/users/logout',
-            
-        })
+
         const active_res = await axios( {
             method: 'PATCH',
             url: '/api/v1/users/active',
@@ -50,6 +40,13 @@ export const logout = async ()=>{
                 active : false
             }
         })
+        
+        const res = await axios( {
+            method: 'GET',
+            url: '/api/v1/users/logout',
+            
+        })
+        
         if( res.data.status === 'success' && active_res.data.status === 'success')
             location.reload(true)// true is required becuz we want a page from server not from cache
     } catch ( err){

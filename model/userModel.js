@@ -80,6 +80,11 @@ const userSchemaObject = {
     }],
     interests:[{
         type: String
+    }],
+    recommendedPeers: [{
+        type : mongoose.Schema.ObjectId,
+        ref: 'User',
+        
     }]
 }
 

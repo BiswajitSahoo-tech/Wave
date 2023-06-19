@@ -9,6 +9,7 @@ import { overlap } from './overlap.js'
 import { disconnect, markBusy } from './disconnect.js'
 import { updateSettings } from './updateSettings.js'
 import {_compress} from './compress.js'
+import {tokenize} from './tokenize.js'
 
 
 //dom elements 
@@ -152,9 +153,9 @@ if(signupBtn){
         const passwordConfirm = document.getElementById('passwordConfirm').value
         const bio = document.getElementById('bio').value
         const interests = document.getElementById('interest').value
-        const _interests = 
+        const _interests = tokenize(interests)
         
-        signup(name , email,peerId,bio,interests, password, passwordConfirm)
+        signup(name , email,peerId,bio,_interests, password, passwordConfirm)
     })
 }
 

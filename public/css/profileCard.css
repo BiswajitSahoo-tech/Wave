@@ -31,7 +31,8 @@
     flex-direction: column;
     overflow :hidden;
     border-radius :2rem;
-    box-shadow: 0px 1rem 1.5rem gainsboro
+    box-shadow: 0px 1rem 1.5rem gainsboro;
+    width: 20%;
    
 }
 

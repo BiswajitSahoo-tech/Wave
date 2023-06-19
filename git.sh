@@ -1,3 +1,3 @@
 git add .
-git commit -m "tokenizer"
+git commit -m "PRS manual"
 git push origin main
