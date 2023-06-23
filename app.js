@@ -68,10 +68,14 @@ const fontSrcUrls = [
     'fonts.googleapis.com',
     'fonts.gstatic.com'
 ];
+const defaultSrcUrls = [
+  'https://wwf.org/',
+  '127.0.0.1:8002/'
+]
 app.use(
     helmet.contentSecurityPolicy({
         directives: {
-            defaultSrc: [],
+            defaultSrc: ["'self'", ...defaultSrcUrls],
             connectSrc: ["'self'", ...connectSrcUrls],
             scriptSrc: ["'self'","'unsafe-inline'", ...scriptSrcUrls],
             styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],

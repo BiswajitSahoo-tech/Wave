@@ -296,94 +296,31 @@
       margin-bottom: 20px;
       align-self: center;
   }
-  #game_board {
-      border: solid;
-      width: fit-content;
-      height: fit-content;
-
-  }
-  #row {
-      
-      width: fit-content;
-      height: fit-content;
-      display: flex;
-      align-content: stretch;
-  }
-  .square {
-      border: solid;
-      width: 100px;
-      height: 100px;
-      margin: 0px 0px 0px 0px;
-      display: flex;
-      flex-direction: row;
-      flex-wrap: nowrap;
-      align-content: flex-start;
-      justify-content: center;
-      align-items: baseline;
-  }
-  #squareContent {
-      width: 100px;
-      height: 100px;
-      font-size: 80px;
-      margin-top: 0px;
-      margin-bottom: 0px;
-      padding: 0;
-      display: flex;
-      flex-direction: row;
-      align-content: center;
-      align-items: center;
-      justify-content: center;
-      
-  }
-  #gameConsole {
+  #gamePortal {
       display: none;
-      /* display: flex; */
-      align-content: stretch;
-      padding: 5%;
-      border-radius: 10px;
-      box-shadow: 0px 0px 5px;
-      /* margin-top: 20px;
-      margin-left: 20px;
-      margin-left: 20px;
-      margin-bottom: 20px; */
+      width: 100%;
+      height: 100%;
+                
+  }
+  #iframe{
+    width: inherit;
   }
   #gamePanel {
-      display: none;
-      /* display: flex */
-      flex-direction: column;
-      flex-wrap: nowrap;
-      align-content: center;
-      justify-content: space-evenly;
-      align-items: center;
-      height: 35%;
-      width: 40%;
-      box-shadow: 0px 0px 7px 0px darkgrey;
-      border-radius: 10px;
-  }
-  #resetBtn {
-    border-radius: 10px;
-    border: 0;
-    box-shadow: 0px 0px 2px;
-    margin-top: 5%;
-    font-family: system-ui;
-    font-weight: bold;
-  }
-  #exitBtn {
-    border-radius: 10px;
-    border: 0;
-    box-shadow: 0px 0px 2px;
-    margin-top: 5%;
-    font-family: system-ui;
-    font-weight: bold;
-  }
-  #scoreBoard {
-      width: fit-content;
-      height: fit-content;
-      margin-left: 4%;
-      font-weight: bold;
-      font-family: system-ui;
-      
-  }
+                display: none;
+                /* display: flex */
+                flex-direction: column;
+                flex-wrap: nowrap;
+                align-content: center;
+                justify-content: space-evenly;
+                align-items: center;
+                height: 35%;
+                width: 40%;
+                box-shadow: 0px 0px 7px 0px darkgrey;
+                border-radius: 10px;
+            }
+  
+  
+
   #options {
       display: none;
   }
@@ -707,41 +644,17 @@
     <!-- AUDIO CALL BLOCK END -->
 
     <!-- GAME DIV  -->
-    <div id="gameConsole">
-      <div style="display: flex;flex-direction: column-reverse;flex-wrap: nowrap;justify-content: center;align-items: stretch;">
-        <button id="exitBtn" onclick="exitTic()">Exit</button>
-        <button id="resetBtn" onclick="reset('btn')">Reset</button>
-        <div id="game_board">
-            <div id="row">
-                <div class="square"><p id="squareContent"></p></div>
-                <div class="square"><p id="squareContent"></p></div>
-                <div class="square"><p id="squareContent"></p></div>
-            </div>
-            <div id="row">
-                <div class="square"><p id="squareContent"></p></div>
-                <div class="square"><p id="squareContent"></p></div>
-                <div class="square"><p id="squareContent"></p></div>
-            </div>
-            <div id="row">
-                <div class="square"><p id="squareContent"></p></div>
-                <div class="square"><p id="squareContent"></p></div>
-                <div class="square"><p id="squareContent"></p></div>
-            </div>      
-        </div>
-      </div>
-        
-        <div id="scoreBoard">
-            <p id="turn">Now it is yours turn</p>
-            <p id="winner">Congrats!! You are the winner</p>
-        </div>
-    </div>
     <div id="gamePanel">
-        
+              
       <div style="width: 90%;height: 65%; display: flex;flex-direction: column;flex-wrap: nowrap;align-content: center;justify-content: center;align-items: center;">
           <p style="text-align: center;overflow-wrap: break-word;font-weight: BOLD;font-family: system-ui;font-size: 172%;"> TIC-TAC-TOE</p>
       </div>
-      <button onclick="tictactoe()" style="width: inherit;height: 14%;border-radius: 10px;background-color: aliceblue;    width: inherit;font-family: system-ui;border: 0;box-shadow: 0px 0px 2px 0px;"><B>Request to play</B></button>
+      <button onclick="sendTicPurposal()" style="width: inherit;height: 14%;border-radius: 10px;background-color: aliceblue;    width: inherit;font-family: system-ui;border: 0;box-shadow: 0px 0px 2px 0px;"><B>Request to play</B></button>
     </div>
+    <div id="gamePortal">
+      <iframe id="iframe"></iframe>
+    </div>
+    <!-- DECOUPLED -->
     
     <!-- GAME DIV END -->
     
@@ -792,7 +705,7 @@
           document.getElementById('share_parent').style.display = 'none'
           document.getElementById('live').style.display = 'none'
           document.getElementById('audio_parent').style.display = 'none'
-          document.getElementById('gameConsole').style.display = 'none'
+          document.getElementById('gamePortal').style.display = 'none'
           document.getElementById('sharePanel').style.display = 'none'
           document.getElementById('videoPanel').style.display = 'none'
           document.getElementById('gamePanel').style.display = 'none'
@@ -809,7 +722,7 @@
             
             //GLOBAL VARIABLE
             var fixedFileChannel= undefined, fixedTicChannel= undefined
-            var DataConnection = undefined, fileConnection=false, ticConnection = undefined
+            var DataConnection = undefined, fileConnection=false
             var currentCall = undefined, streamCall= undefined, audioCall= undefined
             var fileChunks = []; 
              
@@ -847,95 +760,7 @@
                         setFileHandler()
                         
                 }
-                else if(dataCon.metadata && dataCon.metadata.isTic){
-                    if(confirm('HE/SHE wants to play TIC-TAC-TOE')){
-                        ticConnection = dataCon
-                        // const gameConsole = document.getElementById('gameConsole')
-                        const turn = document.getElementById('turn')
-                        const winner = document.getElementById('winner')
-                        gamePanel()
-
-                        _turn = 1;
-                        turn.innerHTML = 'NOW TURN IS HE/SHE'
-
-                        // gameConsole.style.display = 'flex'
-                        GAME_OVER = false
-
-                        const sqrs = document.getElementsByClassName('square')
-                        // console.log( sqrs)
-                        
-                        for(var i = 0 ; i < sqrs.length ; i++){
-                            sqrs[i].setAttribute('id', i)
-                            const id = sqrs[i].id
-                            if(1|| sqrs[i].onclick === null){
-                                sqrs[i].onclick = (e)=>{
-                                    if(GAME_OVER){
-                                        alert('GAME OVER!!')
-                                        return
-                                    }
-                                    if(_turn !== 0){
-                                        alert('ITS NOT YOUR TURN MAN!! PLEASE WAIT')
-                                        return
-                                    }
-                                    if( !mark(id,'O') ){
-                                        alert('PLEASE MARK A UNMARKED SQUARE.')
-                                        return
-                                    }
-                                    
-                                    if( isWinner('O') === 'O'){
-                                        dataCon.send( id)
-                                        GAME_OVER = true
-                                        winner.innerHTML = "YOU WIN 🎊🎉🎊"
-                                        setTimeout(()=>{
-                                            dataCon.send('GO')
-                                        },1000)
-                                        
-                                        return
-                                    }  
-                                    _turn = 1
-                                    e.preventDefault()
-                                    turn.innerHTML = "NOW TURN IS HE/SHE"
-                                    // mark(id,'O')
-                                    dataCon.send( id)
-                                }
-                            }
-                            // console.log(sqrs[i])
-
-                        }
-                        dataCon.on('data', data=>{
-                            if(data === 'exit'){
-                                console.log('exit calledd')
-                                ticConnection = undefined
-                                reset('notbtn')
-                                dataCon.close()
-                                document.getElementById('gamePanel').style.display = 'flex'
-                                document.getElementById('gameConsole').style.display = 'none'
-                                return
-                            }
-                            if( data == 'reset'){
-                                reset('notbtn')
-                                return;
-                            }
-                            if(data === 'GO'){
-                                winner.innerHTML="YOU LOOSE ❤️"
-                                GAME_OVER = true
-                                return
-                            }
-                            mark(data,'X')
-                            _turn = 0
-                            turn.innerHTML = "NOW TURN IS YOUR"
-                            
-                        })
-                        
-                    }else{
-                        console.log('game rejected')
-                        setTimeout(() => {
-                            dataCon.send('rejected')
-                        }, 1000);
-                        
-                        // dataCon.close()
-                    }
-                }
+                
                 else if(dataCon.metadata && dataCon.metadata.isChat){
                     
                     DataConnection = dataCon
@@ -944,6 +769,28 @@
                         if(data === "DSCNT"){
                           DataConnection = undefined
                           document.getElementById('disCnt').click()
+                        }
+                        else if( data === "PLY_TIC"){
+                          if(confirm(peerId + " wants to play tic-tac-toe")){
+                            DataConnection.send("TIC_ACCEPTED")
+                            hideEveryThing()
+                            document.getElementById('gamePortal').style.display = 'flex'
+                            const url = " http://127.0.0.1:8002/wave/"+yourPeerId+','+peerId
+                            document.getElementById("iframe").src = url;
+                          }
+                          else{
+                            DataConnection.send("TIC_DENIED")
+                          }
+                        }
+                        else if(data=== "TIC_DENIED"){
+                          alert(peerId+ " denied to play tic, choose some other game to play.")
+                        }
+                        else if( data === "TIC_ACCEPTED"){
+                          hideEveryThing()
+                          document.getElementById('gamePortal').style.display = 'flex'
+                          const url = " http://127.0.0.1:8002/wave/"+yourPeerId+','+peerId
+                          document.getElementById("iframe").src = url;
+
                         }
                         else{
                           appendmsg(data,'HE/SHE:')
@@ -1073,6 +920,28 @@
                 if(data === "DSCNT"){
                     DataConnection = undefined
                     document.getElementById('disCnt').click()
+                }
+                else if( data === "PLY_TIC"){
+                  if(confirm(peerId + " wants to play tic-tac-toe")){
+                    DataConnection.send("TIC_ACCEPTED")
+                    hideEveryThing()
+                    document.getElementById('gamePortal').style.display = 'flex'
+                    const url = " http://127.0.0.1:8002/wave/"+yourPeerId+','+peerId
+                    document.getElementById("iframe").src = url;
+                  }
+                  else{
+                    DataConnection.send("TIC_DENIED")
+                  }
+                }
+                else if(data=== "TIC_DENIED"){
+                  alert(peerId+ " denied to play tic, choose some other game to play.")
+                }
+                else if( data === "TIC_ACCEPTED"){
+                  hideEveryThing()
+                  document.getElementById('gamePortal').style.display = 'flex'
+                  const url = " http://127.0.0.1:8002/wave/"+yourPeerId+','+peerId
+                  document.getElementById("iframe").src = url;
+
                 }
                 else{
                     appendmsg(data,'HE/SHE:')
@@ -1402,187 +1271,41 @@
 
 
             //TIC-TAC-TOE
+            function sendTicPurposal(){
+              DataConnection.send('PLY_TIC')
+            }
             function gamePanel(e) {
-              hideEveryThing()
+
               if(e === undefined)
                 document.getElementById('agames').style.backgroundColor = '#dee2e6'
               else
                 clicked(e)
-              if(ticConnection === undefined){
-                document.getElementById('gamePanel').style.display = 'flex'
-              }
-              else{
-                document.getElementById('gameConsole').style.display = 'flex'
-              }
+
               
-
-
-            }
-            let GAME_OVER; var _turn;
-            
-            function reset(mode) {
-                const sqrs = document.getElementsByClassName('square')
-                for(let i=0;i<9;i++){
-                    sqrs[i].firstChild.innerHTML = ""
+              console.log('gamePanel called')
+              const p = document.getElementById('gamePortal')
+              console.log(p.style.display)
+              if(p.style.display === 'flex'){
+                console.log('//////////***********//////////')
+                if(confirm('You will be get out of current game')){
+                  p.src = undefined
+                  p.style.display = 'none'
+                  document.getElementById('gamePanel').style.display = 'flex'
                 }
-                GAME_OVER = false
-                const winner = document.getElementById('winner')
-                winner.innerHTML = ""
-                const turn = document.getElementById('turn')
-                turn.innerHTML= mode === "btn"? "NOW TURN IS YOURS" : "NOW TURN IS HE/SHE"
-                _turn = mode === "btn"? 0 : 1
-                if(ticConnection !== undefined && mode === 'btn'){
-                    ticConnection.send('reset')
+                else{
+                  
                 }
+                return
+              }
 
-            }
-            function mark( id, sign){
-                console.log('mark', id)
-                const e=document.getElementById(id)
-                if(e.firstChild.innerHTML === "")
-                    e.firstChild.innerHTML = sign
-                else
-                    return false
-                return true
-            }
-            
-            function tictactoe(){
-                if(ticConnection !== undefined){
-                    alert('you already have a ticConnection')
-                    return
-                }
-
-                
-                let dataConn = peer.connect(peerId , {metadata:{isTic:true}})
-                ticConnection = dataConn
-                const gameConsole = document.getElementById('gameConsole')
-                const turn = document.getElementById('turn')
-                const winner = document.getElementById('winner')
-                reset('btn')
-                turn.innerHTML= "NOW TURN IS YOURS"
-                gameConsole.style.display = 'flex'
-                document.getElementById('gamePanel').style.display = 'none'
-                const sqrs = document.getElementsByClassName('square')
-                // console.log( sqrs)
-                GAME_OVER = false
-                for(var i = 0 ; i < sqrs.length ; i++){
-                    sqrs[i].setAttribute('id', i)
-                    const id = sqrs[i].id
-                    // console.log( sqrs[i].onclick)
-                    if( sqrs[i].onclick === null){
-                        sqrs[i].onclick =  (e)=>{
-                            e.preventDefault()
-                            if(ticConnection === undefined){
-                                alert( 'HE/SHE refused, you cannot play.')
-                                return
-                            }
-                            if(GAME_OVER){
-                                alert('GAME OVER!!')
-                                return
-                            }
-                            if(_turn !== 0){
-                                alert('IT IS NOT YOUR TURN MAN!! PLEASE WAIT.')
-                                return
-                            }
-                            if( !mark(id,'X') ){
-                                alert('PLEASE MARK A UNMARKED SQUARE.')
-                                return
-                            }
-                            
-                            if( isWinner('X') === 'X'){
-                                ticConnection.send(id)
-                                GAME_OVER = true
-                                winner.innerHTML = "YOU WIN 🎊🎉🎊"
-                                setTimeout(() => {
-                                    ticConnection.send('GO')
-                                }, 1000);
-                                return;
-                            }
-                            _turn = 1
-                            turn.innerHTML= "NOW TURN IS HE/SHE"
-                            // mark(id,'X')
-                            ticConnection.send( id)
-                        }
-                    // console.log(sqrs[i])
-                    }
-                    
-
-                }
-                
-                dataConn.on('data', data=>{
-                    console.log(data)
-                    if(data === 'exit'){
-                      
-                      ticConnection = undefined
-                      
-                      document.getElementById('gamePanel').style.display = 'flex'
-                      document.getElementById('gameConsole').style.display = 'none'
-                      reset('notbtn')
-                      return;
-                    }
-                    if(data === 'reset'){
-                        reset('notbtn')
-                        return;
-                    }
-                    if(data === 'rejected'){
-                        alert('HE/SHE refused to play.')
-                        dataConn = undefined
-                        ticConnection = undefined
-                        document.getElementById('gamePanel').style.display = 'flex'
-                        document.getElementById('gameConsole').style.display = 'none'
-                        return;
-                    }
-                    if(data === 'GO'){
-                        winner.innerHTML="YOU LOOSE ❤️"
-                        GAME_OVER = true
-                        return
-                    }
-                    mark(data,'O')
-                    turn.innerHTML= "NOW TURN IS YOURS"
-                    _turn = 0
-                })
-                dataConn.on('close', ()=>{
-                    alert('HE/SHE denied.')
-                })
-                
-            }
-
-            function isWinner(sign){
-                // const sqrs = document.getElementsByClassName('squares')
-                const squares = Array(9).fill(null)
-                for(var i=0;i<9;i++){
-                    squares[i] = document.getElementById(i.toString()).firstChild.innerHTML
-                }
-                console.log( squares)
-                const lines = [
-                    [0, 1, 2],
-                    [3, 4, 5],
-                    [6, 7, 8],
-                    [0, 3, 6],
-                    [1, 4, 7],
-                    [2, 5, 8],
-                    [0, 4, 8],
-                    [2, 4, 6],
-                ];
-                for (let i = 0; i < lines.length; i++) {
-                    const [a, b, c] = lines[i];
-                    if (squares[a]===sign && squares[a] === squares[b] && squares[a] === squares[c]) {
-                        return sign;
-                    }
-                }
-                return null;
-            }
-          
-            function exitTic(){
-              ticConnection.send('exit');
-              setTimeout(() => {
-                ticConnection = undefined
-                // dataConn.close()
-              }, 2000);
-              reset('btn')
+              hideEveryThing()
+              
+             
+              
               document.getElementById('gamePanel').style.display = 'flex'
-              document.getElementById('gameConsole').style.display = 'none'
               
+              
+             
             }
 
 
