@@ -70,7 +70,8 @@ const fontSrcUrls = [
 ];
 const defaultSrcUrls = [
   'https://wwf.org/',
-  '127.0.0.1:8002/'
+  '127.0.0.1:8002/',
+  'https://tic-tac-toe-1b9t.onrender.com'
 ]
 app.use(
     helmet.contentSecurityPolicy({
