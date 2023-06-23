@@ -744,6 +744,7 @@
     </div>
     
     <!-- GAME DIV END -->
+    
   </div>
   <msglist></msglist>
   <div id="wrksDataStore" data-peerid="<%= user.peerId %>" data-recpeerid="<%= con.receiverPeerId %>" data-calpeerid="<%= con.callerPeerId %>" data-connid="<%= con._id %>"></div>
@@ -810,7 +811,7 @@
             var fixedFileChannel= undefined, fixedTicChannel= undefined
             var DataConnection = undefined, fileConnection=false, ticConnection = undefined
             var currentCall = undefined, streamCall= undefined, audioCall= undefined
-            var fileChunks = []; var _turn;
+            var fileChunks = []; 
              
             var charcter = undefined
             const wrksDataStore = document.getElementById('wrksDataStore')
@@ -1417,7 +1418,7 @@
 
 
             }
-            let GAME_OVER;
+            let GAME_OVER; var _turn;
             
             function reset(mode) {
                 const sqrs = document.getElementsByClassName('square')
