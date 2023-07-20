@@ -1,4 +1,4 @@
-# Doordarshan
+# Wave
 A p2p protocol and application | chat, video call, call, share files, stream, play games with your peer.
 
 # Screenshots
