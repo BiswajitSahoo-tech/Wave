@@ -154,7 +154,6 @@ if(signupBtn){
         const bio = document.getElementById('bio').value
         const interests = document.getElementById('interest').value
         const _interests = tokenize(interests)
-        
         signup(name , email,peerId,bio,_interests, password, passwordConfirm)
     })
 }
